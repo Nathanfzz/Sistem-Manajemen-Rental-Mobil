@@ -118,22 +118,24 @@ def add_car():
     print("+----------------------------+")
     print("|         Tambah Mobil       |")
     print("+----------------------------+")
-    while True:
-        car_name = input("Masukkan Nama Mobil: ").strip()
-        if car_name.replace(" ", "").isalpha():
-            break
-        else:
-            print("Nama mobil hanya boleh menggunakan abjad, bukan huruf.")
-    car_price = input("Harga Sewa per Hari: ")
-    car_plate = input("Nomor Plat: ")
-    stock = "tersedia"
+    try :
+        while True:
+            car_name = input("Masukkan Nama Mobil: ").strip()
+            if car_name.replace(" ", "").isalpha():
+                break
+            else:
+                print("Nama mobil hanya boleh menggunakan abjad, bukan huruf.")
+        car_price = int(input("Harga Sewa per Hari: "))
+        car_plate = input("Nomor Plat: ")
+        stock = "tersedia"
 
-    cars = read_csv(car_file)
-    cars.append({"id": str(len(cars)+1), "name": car_name, "price": car_price, "plate": car_plate, "status": stock})
-    write_csv(car_file, ["id", "name", "price", "plate", "status"], cars)
-    update_ids(car_file)
-    print("Mobil berhasil ditambahkan.")
-
+        cars = read_csv(car_file)
+        cars.append({"id": str(len(cars)+1), "name": car_name, "price": car_price, "plate": car_plate, "status": stock})
+        write_csv(car_file, ["id", "name", "price", "plate", "status"], cars)
+        update_ids(car_file)
+        print("Mobil berhasil ditambahkan.")
+    except ValueError :
+        print("Input berupa angka bukan berupa huruf")
 def list_cars():
     cars = read_csv(car_file)
     if cars:
@@ -145,32 +147,42 @@ def update_car():
     print("+----------------------------+")
     print("|         Update Mobil       |")
     print("+----------------------------+")
-    list_cars()
-    car_name = input("Masukkan nama mobil yang ingin diperbarui: ")
-    new_car_name = input("Masukkan nama mobil baru: ")
-    new_car_price = input("Masukkan harga baru: ")
-    new_car_status = input("Masukkan status mobil: ")
-    updated_rows = []
-    found = False
+    try :
+        list_cars()
+        car_id = int(input("Masukkan ID Mobil yang ingin diedit: "))
+        edit_car = read_csv(car_file)
+        cars = [c for c in edit_car if c["id"] == car_id]
+        if cars : 
+            new_car_name = input("Masukkan nama mobil baru: ")
+            new_car_price = int(input("Masukkan harga baru: "))
+            new_car_plate = input("Masukkan plat baru: ")
+            new_car_status = input("Masukkan status mobil: ")
+            updated_rows = []
+            found = False
 
-    with open(car_file, mode="r") as file:
-        csv_reader = csv.reader(file)
-        for row in csv_reader:
-            if row[0] == car_name:
-                updated_rows.append([car_name, new_car_name, new_car_price,new_car_status])
-                found = True
-                print(f"Data {car_name} berhasil diperbarui.")
-            else:
-                updated_rows.append(row)
+            with open(car_file, mode="r") as file:
+                csv_reader = csv.reader(file)
+                for row in csv_reader:
+                    if row[0] == car_id:
+                        updated_rows.append([new_car_name, new_car_name, new_car_price, new_car_plate,new_car_status])
+                        found = True
+                        print(f"Data mobil berhasil diperbarui.")
+                    else:
+                        updated_rows.append(row)
 
-    if not found:
-        print(f"Data dengan nama {new_car_name} tidak ditemukan.")
-        return
+            if not found:
+                print("Mobil tidak ditemukan.")
+            return
 
 
-    with open(car_file, mode="w", newline="") as file:
-        csv_writer = csv.writer(file)
-        csv_writer.writerows(updated_rows)
+        with open(car_file, mode="w", newline="") as file:
+            csv_writer = csv.writer(file)
+            csv_writer.writerows(updated_rows)
+
+        update_ids(car_file)
+
+    except ValueError :
+        print("input berupa angka bukan huruf")
 
 def delete_car():
     print("+----------------------------+")
@@ -238,12 +250,12 @@ def rent_car(user):
             write_csv(account_file, ["username", "password", "role", "balance"], accounts)
 
             print("Rental berhasil.")
-            print("\n                      Rental Laju Sejahtera")
+            print("\n                     Rental Laju Sejahtera")
             print("   Jl. Sambaliung, Sempaja Selatan Samarinda Utara, Indonesia   ")
             print("                          Customer Service")
             print("================================================================")
-            print(f"Nama Penyewa         : {user['username']}")
-            print(f"Merk mobil           : {car['name']}")
+            print(f"Nama Penyewa         : {user["username"]}")
+            print(f"Merk mobil           : {car["name"]}")
             print(f"Lama Sewa            : {days} hari")
             print(f"Tanggal diambil      : {transaction_date}")
             print(f"Tanggal dikembalikan : {datetime.now() + timedelta(days=days)}")
@@ -385,8 +397,7 @@ def run():
                 register()
             elif choice == "exit":
                 print("Terima kasih telah menggunakan program ini")
-                return
-                exit
+                exit()
             else:
                 print("Opsi tidak valid.")
     except KeyboardInterrupt :
