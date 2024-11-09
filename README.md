@@ -85,21 +85,56 @@ Pada menu ini akan disuruh untuk menambahkan nama voucher dan menambahkan jumlah
 Ketika memasukkan input 8 akan kembali ke menu awal
 
 
+## Menu User
+Selanjutnya kita akan mencobas login dengan menggunakan username dengan role user
 
+![Screenshot 2024-11-09 192112](https://github.com/user-attachments/assets/0f38b7c2-4845-4e28-a36c-ec278b6d8405)
 
+Pada menu user ada  6 menu, yaitu : rental, kembalikan mobil, lihat daftar mobil, lihat saldo, topup saldo, dan logout
 
+## Menu Rental
 
+![Screenshot 2024-11-09 192135](https://github.com/user-attachments/assets/b4f56d51-4ed6-4ec4-abd2-8f1462221a99)
 
+Pada menu ini juga terdapat fitur search dan sorting juga sama seperti fitur pada list di menu admin tadi. Kita coba memasukkan query n
 
+![Screenshot 2024-11-09 192203](https://github.com/user-attachments/assets/11fd2a98-31e1-4199-92a1-86a01eb4cb74)
 
-## Jika Login dengan username dan password role "user" maka akan muncul menu user
+Ketika sudah menemukan mobil yang dicari, maka akan diminta untuk memasukkan id mobil yang ingin dipinjam dan ingin meminjam berapa lama. Jika sudah maka akan menampilkan invoice dan menambahkan saldo admin sesuai dengan total transaksi
+![Screenshot 2024-11-09 192253](https://github.com/user-attachments/assets/56104128-5a1b-4d89-a905-7c824bd88007)
 
+## Menu Kembalikan Mobil
 
-## Jika Regisrasi (daftar akun)
+![Screenshot 2024-11-09 192337](https://github.com/user-attachments/assets/ea5a523e-fd1d-427b-887a-3a44abac1144)
 
+Pada menu ini akan menampilkan mobil yang dipinjam oleh user dan akan disuruh memasukkan nama, nama mobil, dan no plat dari mobil yang dipinjam kemaren
 
+## Menu Lihat Mobil
 
-## Jika Exit maka akan keluar dari program
+![Screenshot 2024-11-09 192435](https://github.com/user-attachments/assets/44d5e15a-5a25-4d2e-a70d-2a447900d23c)
 
+menu ini juga sama seperti menu lihat mobil yang ada pada menu admin
 
-##
+## Menu Lihat Saldo
+
+![Screenshot 2024-11-09 192508](https://github.com/user-attachments/assets/5afc0d23-f717-445c-a826-02b036ceee9e)
+
+Pada menu ini akan melihatkan saldo yang dimiliki dari user
+
+## Menu Tambah Saldo 
+
+![Screenshot 2024-11-09 192551](https://github.com/user-attachments/assets/73dbf5a7-d4ea-4049-9159-5e2eaee7abeb)
+
+Menu ini untuk menambahkan saldo user dengan cara memasukkan kode voucher yang tersedia pada database voucher. Jika kode voucher ada maka saldo user akan bertambah sesuai dengan nilai dari kode voucher
+
+## Menu Register
+
+![Screenshot 2024-11-09 192615](https://github.com/user-attachments/assets/db8e33d3-af7b-43bb-9506-294abac1794c)
+
+Untuk melakukan register user perlu memasukkan username dan password, untuk username tidak boleh mengandung angka ataupun simbol. Dan untuk password, harus melakukan konfirmasi, jika konfirmasinya tidak sesuai maka akan diminta memasukkan ulang password lagi. Ketika sudah berhasil registrasi maka data user akan ditambahkan pada database CSV dan diminta untuk login
+
+## Menu Exit
+
+![image](https://github.com/user-attachments/assets/dc45c057-66c9-4553-9a89-5dd83c45a1cd)
+
+Jika mengetikkan exit pada menu awal, maka program akan berhenti dan mengucapkan terimakasih
